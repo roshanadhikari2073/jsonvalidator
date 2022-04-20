@@ -23,8 +23,17 @@ func main() {
 			fixedLine := fmt.Sprintf("\"_id\" : %s,", rs[1])
 			lines[i] = strings.ReplaceAll(line, line, fixedLine)
 		}
+		if strings.Contains(line, "NumberInt") {
+			rs := rgx.FindStringSubmatch(lines[i])
+			fixedLiner := fmt.Sprintf("\"ogc_fid\" : %s,", rs[1])
+			lines[i] = strings.ReplaceAll(line, line, fixedLiner)
+		}
 
 	}
 	output := strings.Join(lines, "\n")
-	fmt.Println(string(output))
+	e := ioutil.WriteFile("filesuccess.json", []byte(output), 0644)
+	if e != nil {
+		panic(e)
+	}
+
 }
