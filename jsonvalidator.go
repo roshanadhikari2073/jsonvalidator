@@ -1,3 +1,5 @@
+// Author:- Roshan Adhikari
+// Simple program to fix GIS Json error
 package main
 
 import (
@@ -8,6 +10,7 @@ import (
 	"strings"
 )
 
+// regex to capture datas inside the small bracket paranthesis
 var rgx = regexp.MustCompile(`\((.*?)\)`)
 
 func main() {
@@ -31,6 +34,7 @@ func main() {
 
 	}
 	output := strings.Join(lines, "\n")
+	// writing the datas into new file
 	e := ioutil.WriteFile("filesuccess.json", []byte(output), 0644)
 	if e != nil {
 		panic(e)
